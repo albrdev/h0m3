@@ -1,0 +1,12 @@
+.gitignore text eol=lf
+.gitattributes text eol=lf
+README.md text eol=lf
+Assets/Script/**/*.cs text eol=lf
+
+Assets/Scenes/**/.unity binary
+Assets/Resources/Animations/**/*.anim binary
+Assets/Resources/Animations/**/*.controller binary
+Assets/Resources/Materials/**/*.mat binary
+Assets/Resources/Prefabs/**/*.prefab binary
+Assets/Resources/Shaders/**/*.shader binary
+Assets/Resources/Sprites/**/*.png binary
