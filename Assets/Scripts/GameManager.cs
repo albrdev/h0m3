@@ -39,15 +39,13 @@ public class GameManager : MonoBehaviour
             throw new System.Exception("Multiple objects of this type is not allowed");
 
         Instance = this;
+
+        m_BSOD.Find("RestartButton").GetComponent<Button>().onClick.AddListener(SpawnPlayer);
     }
 
     private void Start()
     {
         SpawnPlayer();
-    }
-
-    private void Update()
-    {
     }
 
     private void OnDestroy()
