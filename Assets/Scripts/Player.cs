@@ -29,10 +29,11 @@ public class Player : MonoBehaviour
 				direction.x = 1;
 		}
 		
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKey(KeyCode.Space))
 		{
 			Debug.Log("Space key was pressed.");
-            rgdb.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
+            //rgdb.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
+            rgdb.velocity += Vector2.up * JumpForce;
 		}
 
 		Move(direction);
