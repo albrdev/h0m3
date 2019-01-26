@@ -18,14 +18,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Transform m_BSOD;
 
-    public void OnPlayerSpawn()
+    public void ShowBSOD()
     {
         m_BSOD.gameObject.SetActive(false);
     }
 
-    public void OnPlayerDeath()
+    public void HideBSOD()
     {
         m_BSOD.gameObject.SetActive(true);
+    }
+
+    public void SpawnPlayer()
+    {
+        GameObject.Instantiate(m_PlayerPrefab, null, true);
     }
 
     private void Awake()
@@ -38,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject.Instantiate(m_PlayerPrefab, null, true);
+        SpawnPlayer();
     }
 
     private void Update()
