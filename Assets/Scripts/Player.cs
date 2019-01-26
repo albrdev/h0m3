@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         if(mIsJumping)
         {
             rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
-            Debug.Log(mCurrentJumpHeight);
+            //Debug.Log(mCurrentJumpHeight);
             if (rb.position.y >= mMaxJumpPosition.y)
             {
                 mIsJumping = !mIsJumping;
