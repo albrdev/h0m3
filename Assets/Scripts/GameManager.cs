@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; } = null;
 
     [SerializeField]
+    Player m_PlayerPrefab;
+
+    [SerializeField]
     Transform m_BSOD;
 
     public void OnPlayerSpawn()
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        GameObject.Instantiate(m_PlayerPrefab, null, true);
     }
 
     private void Update()
