@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 		Vector2 direction = new Vector2();
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatCanStandOn);
+        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatCanStandOn);
 
         if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
@@ -43,13 +43,28 @@ public class Player : MonoBehaviour
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
-            rb.velocity = Vector2.up * JumpForce * mJumpforceMultiplyer;
+            //rb.velocity = Vector2.up * JumpForce * mJumpforceMultiplyer;
+            rb.AddForce(new Vector2(0f, JumpForce * mJumpforceMultiplyer), ForceMode2D.Impulse);
 		}
 
 		
     }
 
-	void Move(Vector2 aDir)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Hit ground");
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
+            isGrounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Left ground");
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
+            isGrounded = false;
+    }
+
+    void Move(Vector2 aDir)
 	{
 		rb.velocity = aDir * MovingSpeed;
 	}
