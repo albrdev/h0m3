@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	protected Rigidbody2D rgdb;
+	protected Rigidbody2D rb;
 	public float MovingSpeed = 3;
-    public float JumpForce = 100;
+    public float mMovementspeedMultiplyer = 1;
+
+    public float JumpForce = 100;  
+    public float mJumpforceMultiplyer = 1;
+
+    private bool isGrounded;
+    public Transform feetPos;
+    public float checkRadius;
+    public LayerMask whatCanStandOn;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        rgdb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
 		Vector2 direction = new Vector2();
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatCanStandOn);
 
         if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
@@ -29,17 +39,18 @@ public class Player : MonoBehaviour
 				direction.x = 1;
 		}
 
-		if(Input.GetKeyDown(KeyCode.Space))
+        Move(direction);
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
-			Debug.Log("Space key was pressed.");
-            rgdb.AddForce(new Vector2(rgdb.velocity.x, JumpForce));
+            rb.velocity = Vector2.up * JumpForce * mJumpforceMultiplyer;
 		}
 
-		Move(direction);
+		
     }
 
 	void Move(Vector2 aDir)
 	{
-		rgdb.velocity = aDir * MovingSpeed;
+		rb.velocity = aDir * MovingSpeed;
 	}
 }
