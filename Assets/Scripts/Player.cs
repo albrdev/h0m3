@@ -5,19 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	protected Rigidbody2D rb;
-	public float MovingSpeed = 3;
+	public float MovingSpeed = 2;
     public float mMovementspeedMultiplyer = 1;
 
-    public float JumpForce = 100f;
+    public float JumpForce = 5f;
     public float mJumpforceMultiplyer = 1f;
-    public float MaxJumpHeight = 100f;
+    public float MaxJumpHeight = 1f;
     public float InitJumpSpeed = 10f;
     private Vector2 mMaxJumpPosition = new Vector2();
     private float mCurrentJumpHeight = 0;
     private bool mIsJumping = false;
 
     private bool isGrounded;
-    public float checkRadius;
+    public float checkRadius = 0.3f;
     public LayerMask whatCanStandOn;
     bool IsJumping = false;
     float JumpTimer;
