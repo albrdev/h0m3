@@ -81,6 +81,9 @@ public class Player : MonoBehaviour
         Debug.Log("Hit ground");
         if (LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
             isGrounded = true;
+
+        if (mIsJumping && LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
+            mIsJumping = !mIsJumping;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
