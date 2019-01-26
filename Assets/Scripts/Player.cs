@@ -8,8 +8,13 @@ public class Player : MonoBehaviour
 	public float MovingSpeed = 3;
     public float mMovementspeedMultiplyer = 1;
 
-    public float JumpForce = 100;
-    public float mJumpforceMultiplyer = 1;
+    public float JumpForce = 100f;
+    public float mJumpforceMultiplyer = 1f;
+    public float MaxJumpHeight = 100f;
+    public float InitJumpSpeed = 10f;
+    private Vector2 mMaxJumpPosition = new Vector2();
+    private float mCurrentJumpHeight = 0;
+    private bool mIsJumping = false;
 
     private bool isGrounded;
     public float checkRadius;
@@ -48,13 +53,28 @@ public class Player : MonoBehaviour
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
-            rb.AddForce(new Vector2(rb.velocity.x, JumpForce));
+            //rb.AddForce(new Vector2(rb.velocity.x, JumpForce));
+            mIsJumping = true;
+            mMaxJumpPosition = new Vector2(0, rb.position.y + MaxJumpHeight);
+
         }
 
-        if(rb.velocity.y < 0f)
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f * UnityEngine.Time.deltaTime);
-        if(rb.velocity.y > 0f && !Input.GetKey(KeyCode.Space))
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (2f * UnityEngine.Time.deltaTime);
+        if(mIsJumping)
+        {
+            rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
+            Debug.Log(mCurrentJumpHeight);
+            if (rb.position.y >= mMaxJumpPosition.y)
+            {
+                mIsJumping = !mIsJumping;
+                //mCurrentJumpHeight = 0;
+            }
+            //rb.velocity += Vector2.up * mCurrentJumpHeight;
+        }
+
+        //if(rb.velocity.y < 0f)
+        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f * UnityEngine.Time.deltaTime);
+        //if(rb.velocity.y > 0f && !Input.GetKey(KeyCode.Space))
+        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (2f * UnityEngine.Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -62,6 +82,9 @@ public class Player : MonoBehaviour
         Debug.Log("Hit ground");
         if (LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
             isGrounded = true;
+
+        if (mIsJumping && LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
+            mIsJumping = !mIsJumping;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
