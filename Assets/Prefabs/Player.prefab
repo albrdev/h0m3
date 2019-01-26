@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &454974672617290332
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141,11 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b32eac9b2bbd242ad8a746788e9d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovingSpeed: 3
+  MovingSpeed: 2
   mMovementspeedMultiplyer: 1
-  JumpForce: 20
+  JumpForce: 5
   mJumpforceMultiplyer: 1
-  feetPos: {fileID: 0}
+  MaxJumpHeight: 1
+  InitJumpSpeed: 10
   checkRadius: 0.3
   whatCanStandOn:
     serializedVersion: 2
