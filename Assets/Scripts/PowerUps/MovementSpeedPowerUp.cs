@@ -2,6 +2,6 @@
 {
     public override void Apply(Player player)
     {
-        //player.MovingSpeedMultiplier += value;
+        player.mMovementspeedMultiplyer += m_Value;
     }
 }
