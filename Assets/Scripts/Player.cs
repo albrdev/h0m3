@@ -12,14 +12,21 @@ public class Player : MonoBehaviour
     public float mJumpforceMultiplyer = 1;
 
     private bool isGrounded;
-    public Transform feetPos;
     public float checkRadius;
     public LayerMask whatCanStandOn;
+    bool IsJumping = false;
+    float JumpTimer;
+    float JumpTime = 2f;
 
 
     public float MovementSpeed
     {
         get { return MovingSpeed * mMovementspeedMultiplyer; }
+    }
+
+    private void Awake()
+    {
+        Physics2D.gravity = new Vector2(0f, -20f);
     }
 
     // Start is called before the first frame update
@@ -29,30 +36,24 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 		Vector2 direction = new Vector2();
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatCanStandOn);
 
-        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-		{
-				direction.x = -1;
-		}
-
-        if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-		{
-				direction.x = 1;
-		}
+        direction.x = Input.GetAxis("Horizontal");
 
         Move(direction);
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
-            //rb.velocity = Vector2.up * JumpForce * mJumpforceMultiplyer;
-            rb.AddForce(new Vector2(0f, JumpForce * mJumpforceMultiplyer), ForceMode2D.Impulse);
-		}
+            rb.AddForce(new Vector2(rb.velocity.x, JumpForce));
+        }
 
-
+        if(rb.velocity.y < 0f)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f * UnityEngine.Time.deltaTime);
+        if(rb.velocity.y > 0f && !Input.GetKey(KeyCode.Space))
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (2f * UnityEngine.Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

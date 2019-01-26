@@ -248,6 +248,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 454974672617290330, guid: 87bf2ed68a073d04795651fb9196a5ba,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 454974672617290329, guid: 87bf2ed68a073d04795651fb9196a5ba,
+        type: 3}
+      propertyPath: MovingSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 454974672617290329, guid: 87bf2ed68a073d04795651fb9196a5ba,
+        type: 3}
+      propertyPath: JumpForce
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87bf2ed68a073d04795651fb9196a5ba, type: 3}
 --- !u!1 &534669902
@@ -359,7 +374,7 @@ GameObject:
   - component: {fileID: 539572983}
   - component: {fileID: 539572982}
   - component: {fileID: 539572984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
