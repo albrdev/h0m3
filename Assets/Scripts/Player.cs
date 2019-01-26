@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Physics2D.gravity = new Vector2(0f, -20f);
-        GameManager.Instance.ShowBSOD();
+        GameManager.Instance.HideBSOD();
     }
 
     // Start is called before the first frame update
@@ -101,7 +101,9 @@ public class Player : MonoBehaviour
 
     private void Death()
     {
-        GameManager.Instance.HideBSOD();
+        if(GameManager.Instance != null)
+            GameManager.Instance.ShowBSOD();
+
         Destroy(gameObject);
     }
 
