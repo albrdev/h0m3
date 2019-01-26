@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 	public float MovingSpeed = 3;
     public float mMovementspeedMultiplyer = 1;
 
-    public float JumpForce = 100;  
+    public float JumpForce = 100;
     public float mJumpforceMultiplyer = 1;
 
     private bool isGrounded;
@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
     public float checkRadius;
     public LayerMask whatCanStandOn;
 
+
+    public float MovementSpeed
+    {
+        get { return MovingSpeed * mMovementspeedMultiplyer; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +51,11 @@ public class Player : MonoBehaviour
             rb.velocity = Vector2.up * JumpForce * mJumpforceMultiplyer;
 		}
 
-		
+
     }
 
 	void Move(Vector2 aDir)
 	{
-		rb.velocity = aDir * MovingSpeed;
+		rb.velocity = aDir * MovementSpeed;
 	}
 }
