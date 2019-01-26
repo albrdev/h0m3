@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 	protected Rigidbody2D rgdb;
 	public float MovingSpeed = 3;
     public float JumpForce = 100;
-	
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 		Vector2 direction = new Vector2();
-		
+
         if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
 				direction.x = -1;
@@ -28,16 +28,16 @@ public class Player : MonoBehaviour
 		{
 				direction.x = 1;
 		}
-		
+
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			Debug.Log("Space key was pressed.");
-            rgdb.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
+            rgdb.AddForce(new Vector2(rgdb.velocity.x, JumpForce));
 		}
 
 		Move(direction);
     }
-	
+
 	void Move(Vector2 aDir)
 	{
 		rgdb.velocity = aDir * MovingSpeed;
