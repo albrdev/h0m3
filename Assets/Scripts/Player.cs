@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Physics2D.gravity = new Vector2(0f, -20f);
+        GameManager.Instance.OnPlayerSpawn();
     }
 
     // Start is called before the first frame update
@@ -74,4 +75,15 @@ public class Player : MonoBehaviour
 	{
 		rb.velocity = aDir * MovementSpeed;
 	}
+
+    private void Death()
+    {
+        GameManager.Instance.OnPlayerDeath();
+        Destroy(gameObject);
+    }
+
+    void OnBecameInvisible()
+    {
+        Death();
+    }
 }
