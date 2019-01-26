@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 	protected Rigidbody2D rgdb;
 	public float MovingSpeed = 3;
-    public float JumpForce = 3;
+    public float JumpForce = 100;
 	
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			Debug.Log("Space key was pressed.");
-            rgdb.AddForce(new Vector2(rgdb.velocity.x, JumpForce));
+            rgdb.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
 		}
 
 		Move(direction);
