@@ -16,10 +16,6 @@ public class CameraController : MonoBehaviour
         m_StartTime = UnityEngine.Time.time;
     }
 
-    private void Awake()
-    {
-    }
-
     private void Start()
     {
         Restart();
@@ -34,6 +30,5 @@ public class CameraController : MonoBehaviour
             float y = Mathf.Lerp(m_Start.position.y, m_End.position.y, t);
             transform.position = new Vector3(x, y, transform.position.z);
         }
-        else Restart();
     }
 }
