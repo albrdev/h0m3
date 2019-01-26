@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
 
     public void ShowBSOD()
     {
-        m_BSOD.gameObject.SetActive(false);
+        m_BSOD.gameObject.SetActive(true);
     }
 
     public void HideBSOD()
     {
-        m_BSOD.gameObject.SetActive(true);
+        m_BSOD.gameObject.SetActive(false);
     }
 
     public void SpawnPlayer()
