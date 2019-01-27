@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private Vector2 mMaxJumpPosition = new Vector2();
     private bool mIsJumping = false;
 
+    private Animator m_Animator;
+
     private bool isGrounded;
 
     public float JumpHeight
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Physics2D.gravity = new Vector2(0f, -20f);
+        m_Animator = GetComponent<Animator>();
+
         GameManager.Instance.HideBSOD();
     }
 
@@ -46,32 +50,24 @@ public class Player : MonoBehaviour
 
         direction.x = Input.GetAxis("Horizontal");
 
-        Move(direction);
+        if(direction != Vector2.zero)
+            Move(direction);
+        else if(isGrounded)
+            m_Animator.Play("IDLE");
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
             //rb.AddForce(new Vector2(rb.velocity.x, JumpForce));
-            mIsJumping = true;
-            mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+            //mIsJumping = true;
+            //mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+            JumpTrigger();
 
         }
 
         if(mIsJumping)
         {
-            rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
-            //Debug.Log(mCurrentJumpHeight);
-            if (rb.position.y >= mMaxJumpPosition.y)
-            {
-                mIsJumping = !mIsJumping;
-                //mCurrentJumpHeight = 0;
-            }
-            //rb.velocity += Vector2.up * mCurrentJumpHeight;
+            Jump();
         }
-
-        //if(rb.velocity.y < 0f)
-        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f * UnityEngine.Time.deltaTime);
-        //if(rb.velocity.y > 0f && !Input.GetKey(KeyCode.Space))
-        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (2f * UnityEngine.Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -81,6 +77,11 @@ public class Player : MonoBehaviour
 
         if (mIsJumping && LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
             mIsJumping = !mIsJumping;
+
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Boundable")
+        {
+            JumpTrigger();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -92,7 +93,32 @@ public class Player : MonoBehaviour
     void Move(Vector2 aDir)
 	{
 		rb.velocity = aDir * MovementSpeed;
-	}
+
+        if(aDir == Vector2.right)
+            GetComponent<SpriteRenderer>().flipX = false;
+        else if(aDir == Vector2.left)
+            GetComponent<SpriteRenderer>().flipX = true;
+
+        if(isGrounded)
+            m_Animator.Play("Run_Player");
+    }
+
+    void JumpTrigger()
+    {
+        mIsJumping = true;
+        mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+        m_Animator.Play("Jump_Player");
+    }
+
+    void Jump()
+    {
+        rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
+        if (rb.position.y >= mMaxJumpPosition.y)
+        {
+            mIsJumping = !mIsJumping;
+            m_Animator.Play("Falling_Player");
+        }
+    }
 
     private void Death()
     {
