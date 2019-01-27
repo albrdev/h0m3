@@ -102,18 +102,19 @@ public class Player : MonoBehaviour
         else if(aDir == Vector2.left)
             GetComponent<SpriteRenderer>().flipX = true;
 
-        m_Animator.Play("Run_Player");
+        if(isGrounded)
+            m_Animator.Play("Run_Player");
     }
 
     void JumpTrigger()
     {
         mIsJumping = true;
         mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+        m_Animator.Play("Jump_Player");
     }
 
     void Jump()
     {
-        m_Animator.Play("Jump_Player");
         rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
         if (rb.position.y >= mMaxJumpPosition.y)
         {
