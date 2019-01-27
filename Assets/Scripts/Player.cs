@@ -8,21 +8,18 @@ public class Player : MonoBehaviour
 	public float MovingSpeed = 2;
     public float mMovementspeedMultiplyer = 1;
 
-    public float JumpForce = 5f;
-    public float mJumpforceMultiplyer = 1f;
+    public float m_JumpHeightMultiplier = 1f;
     public float MaxJumpHeight = 1f;
     public float InitJumpSpeed = 10f;
     private Vector2 mMaxJumpPosition = new Vector2();
-    private float mCurrentJumpHeight = 0;
     private bool mIsJumping = false;
 
     private bool isGrounded;
-    public float checkRadius = 0.3f;
-    public LayerMask whatCanStandOn;
-    bool IsJumping = false;
-    float JumpTimer;
-    float JumpTime = 2f;
 
+    public float JumpHeight
+    {
+        get { return MaxJumpHeight * m_JumpHeightMultiplier; }
+    }
 
     public float MovementSpeed
     {
@@ -55,7 +52,7 @@ public class Player : MonoBehaviour
 		{
             //rb.AddForce(new Vector2(rb.velocity.x, JumpForce));
             mIsJumping = true;
-            mMaxJumpPosition = new Vector2(0, rb.position.y + MaxJumpHeight);
+            mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
 
         }
 

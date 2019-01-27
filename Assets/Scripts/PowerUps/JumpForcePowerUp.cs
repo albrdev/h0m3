@@ -2,6 +2,6 @@
 {
     public override void Apply(Player player)
     {
-        player.mJumpforceMultiplyer += m_Value;
+        player.m_JumpHeightMultiplier += m_Value;
     }
 }
