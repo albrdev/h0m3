@@ -53,7 +53,10 @@ public class Player : MonoBehaviour
         if(direction != Vector2.zero)
             Move(direction);
         else if(isGrounded)
-            m_Animator.Play("Idle_Player");
+        {
+            //m_Animator.StopPlayback();
+            m_Animator.Play("IDLE");
+        }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
@@ -101,8 +104,14 @@ public class Player : MonoBehaviour
     void Move(Vector2 aDir)
 	{
 		rb.velocity = aDir * MovementSpeed;
+
+        if(aDir == Vector2.right)
+            GetComponent<SpriteRenderer>().flipX = false;
+        else if(aDir == Vector2.left)
+            GetComponent<SpriteRenderer>().flipX = true;
+
         m_Animator.Play("Run_Player");
-	}
+    }
 
     private void Death()
     {
