@@ -53,10 +53,7 @@ public class Player : MonoBehaviour
         if(direction != Vector2.zero)
             Move(direction);
         else if(isGrounded)
-        {
-            //m_Animator.StopPlayback();
             m_Animator.Play("IDLE");
-        }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
