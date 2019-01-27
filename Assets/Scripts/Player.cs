@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
 	protected Rigidbody2D rb;
 	public float MovingSpeed = 2;
-    public float mMovementspeedMultiplyer = 1;
+    public float m_MovementspeedMultiplyer = 1;
 
     public float m_JumpHeightMultiplier = 1f;
     public float MaxJumpHeight = 1f;
     public float InitJumpSpeed = 10f;
-    private Vector2 mMaxJumpPosition = new Vector2();
+    private Vector2 m_MaxJumpPosition = new Vector2();
     private bool mIsJumping = false;
 
     private Animator m_Animator;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     public float MovementSpeed
     {
-        get { return MovingSpeed * mMovementspeedMultiplyer; }
+        get { return MovingSpeed * m_MovementspeedMultiplyer; }
     }
 
     private void Awake()
@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
         m_Animator = GetComponent<Animator>();
 
         GameManager.Instance.HideBSOD();
+        CameraController.Instance.Restart();
     }
 
     // Start is called before the first frame update
@@ -106,14 +107,14 @@ public class Player : MonoBehaviour
     void JumpTrigger()
     {
         mIsJumping = true;
-        mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+        m_MaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
         m_Animator.Play("Jump_Player");
     }
 
     void Jump()
     {
         rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
-        if (rb.position.y >= mMaxJumpPosition.y)
+        if (rb.position.y >= m_MaxJumpPosition.y)
         {
             mIsJumping = !mIsJumping;
             m_Animator.Play("Falling_Player");

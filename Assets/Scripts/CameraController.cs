@@ -2,6 +2,8 @@
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance { get; private set; } = null;
+
     [SerializeField]
     private Transform m_Start = null;
     [SerializeField]
@@ -16,9 +18,22 @@ public class CameraController : MonoBehaviour
         m_StartTime = UnityEngine.Time.time;
     }
 
+    private void Awake()
+    {
+        if(Instance != null)
+            throw new System.Exception("Multiple objects of this type is not allowed");
+
+        Instance = this;
+    }
+
     private void Start()
     {
         Restart();
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     private void Update()
