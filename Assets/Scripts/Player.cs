@@ -61,29 +61,16 @@ public class Player : MonoBehaviour
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
             //rb.AddForce(new Vector2(rb.velocity.x, JumpForce));
-            mIsJumping = true;
-            mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+            //mIsJumping = true;
+            //mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+            JumpTrigger();
 
         }
 
         if(mIsJumping)
         {
-            m_Animator.Play("Jump_Player");
-            rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
-            //Debug.Log(mCurrentJumpHeight);
-            if (rb.position.y >= mMaxJumpPosition.y)
-            {
-                m_Animator.Play("Falling_Player");
-                mIsJumping = !mIsJumping;
-                //mCurrentJumpHeight = 0;
-            }
-            //rb.velocity += Vector2.up * mCurrentJumpHeight;
+            Jump();
         }
-
-        //if(rb.velocity.y < 0f)
-        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f * UnityEngine.Time.deltaTime);
-        //if(rb.velocity.y > 0f && !Input.GetKey(KeyCode.Space))
-        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (2f * UnityEngine.Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -93,6 +80,11 @@ public class Player : MonoBehaviour
 
         if (mIsJumping && LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
             mIsJumping = !mIsJumping;
+
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Boundable")
+        {
+            JumpTrigger();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -111,6 +103,23 @@ public class Player : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
 
         m_Animator.Play("Run_Player");
+    }
+
+    void JumpTrigger()
+    {
+        mIsJumping = true;
+        mMaxJumpPosition = new Vector2(0, rb.position.y + JumpHeight);
+    }
+
+    void Jump()
+    {
+        m_Animator.Play("Jump_Player");
+        rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
+        if (rb.position.y >= mMaxJumpPosition.y)
+        {
+            mIsJumping = !mIsJumping;
+            m_Animator.Play("Falling_Player");
+        }
     }
 
     private void Death()
