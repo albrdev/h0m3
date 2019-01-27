@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private Vector2 mMaxJumpPosition = new Vector2();
     private bool mIsJumping = false;
 
+    private Animator m_Animator;
+
     private bool isGrounded;
 
     public float JumpHeight
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Physics2D.gravity = new Vector2(0f, -20f);
+        m_Animator = GetComponent<Animator>();
+
         GameManager.Instance.HideBSOD();
     }
 
@@ -46,7 +50,10 @@ public class Player : MonoBehaviour
 
         direction.x = Input.GetAxis("Horizontal");
 
-        Move(direction);
+        if(direction != Vector2.zero)
+            Move(direction);
+        else if(isGrounded)
+            m_Animator.Play("Idle_Player");
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
@@ -86,6 +93,7 @@ public class Player : MonoBehaviour
     void Move(Vector2 aDir)
 	{
 		rb.velocity = aDir * MovementSpeed;
+        m_Animator.Play("Run_Player");
 	}
 
     void JumpTrigger()
@@ -96,10 +104,12 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
+        m_Animator.Play("Jump_Player");
         rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
         if (rb.position.y >= mMaxJumpPosition.y)
         {
             mIsJumping = !mIsJumping;
+            m_Animator.Play("Falling_Player");
         }
     }
 
