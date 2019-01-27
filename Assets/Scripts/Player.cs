@@ -79,7 +79,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Hit ground");
         if (LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
             isGrounded = true;
 
@@ -89,7 +88,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("Left ground");
         if (LayerMask.LayerToName(collision.gameObject.layer) == "Standable")
             isGrounded = false;
     }

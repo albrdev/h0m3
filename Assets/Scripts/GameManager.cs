@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; } = null;
 
     [SerializeField]
-    Player m_PlayerPrefab;
+    Player m_PlayerPrefab = null;
 
     [SerializeField]
-    Transform m_BSOD;
+    Transform m_BSOD = null;
 
     public void ShowBSOD()
     {

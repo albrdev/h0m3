@@ -3,9 +3,9 @@
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    private Transform m_Start;
+    private Transform m_Start = null;
     [SerializeField]
-    private Transform m_End;
+    private Transform m_End = null;
     [SerializeField]
     private float m_Duration = 5f * 60f; // 5min
 
