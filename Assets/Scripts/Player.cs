@@ -50,7 +50,10 @@ public class Player : MonoBehaviour
 
         direction.x = Input.GetAxis("Horizontal");
 
-        Move(direction);
+        if(direction != Vector2.zero)
+            Move(direction);
+        else if(isGrounded)
+            m_Animator.Play("Idle_Player");
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
 		{
@@ -62,10 +65,12 @@ public class Player : MonoBehaviour
 
         if(mIsJumping)
         {
+            m_Animator.Play("Jump_Player");
             rb.position += new Vector2(0, InitJumpSpeed * UnityEngine.Time.deltaTime);
             //Debug.Log(mCurrentJumpHeight);
             if (rb.position.y >= mMaxJumpPosition.y)
             {
+                m_Animator.Play("Falling_Player");
                 mIsJumping = !mIsJumping;
                 //mCurrentJumpHeight = 0;
             }
@@ -96,6 +101,7 @@ public class Player : MonoBehaviour
     void Move(Vector2 aDir)
 	{
 		rb.velocity = aDir * MovementSpeed;
+        m_Animator.Play("Run_Player");
 	}
 
     private void Death()
