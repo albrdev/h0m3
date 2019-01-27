@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 454974672617290330}
   - component: {fileID: 454974672617290332}
   - component: {fileID: 454974672617290329}
+  - component: {fileID: 3588083790001676926}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -143,11 +144,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovingSpeed: 2
   mMovementspeedMultiplyer: 1
-  JumpForce: 5
-  mJumpforceMultiplyer: 1
+  m_JumpHeightMultiplier: 1
   MaxJumpHeight: 1
   InitJumpSpeed: 10
-  checkRadius: 0.3
-  whatCanStandOn:
-    serializedVersion: 2
-    m_Bits: 512
+--- !u!95 &3588083790001676926
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454974672617290328}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

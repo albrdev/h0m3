@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private Vector2 mMaxJumpPosition = new Vector2();
     private bool mIsJumping = false;
 
+    private Animator m_Animator;
+
     private bool isGrounded;
 
     public float JumpHeight
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Physics2D.gravity = new Vector2(0f, -20f);
+        m_Animator = GetComponent<Animator>();
+
         GameManager.Instance.HideBSOD();
     }
 
