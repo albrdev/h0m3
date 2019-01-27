@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -846,7 +846,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252645150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.65, y: 0.22, z: 1.23}
+  m_LocalPosition: {x: 25, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Start: {fileID: 1932480223}
   m_End: {fileID: 1252645151}
-  m_Duration: 60
+  m_Duration: 25
 --- !u!1 &1359150041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1126,7 @@ PrefabInstance:
     - target: {fileID: 5494814225505289224, guid: d8d9e1549ca940044b96353992b06d62,
         type: 3}
       propertyPath: m_Value
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8d9e1549ca940044b96353992b06d62, type: 3}
@@ -1318,7 +1318,7 @@ PrefabInstance:
     - target: {fileID: 4821042557407218798, guid: abd820d7100e1784199379bd9727eb14,
         type: 3}
       propertyPath: m_Value
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd820d7100e1784199379bd9727eb14, type: 3}
@@ -1730,7 +1730,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932480222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.53, y: 0.22, z: 0}
+  m_LocalPosition: {x: -2.5, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1912,7 +1912,7 @@ PrefabInstance:
     - target: {fileID: 4821042557407218798, guid: abd820d7100e1784199379bd9727eb14,
         type: 3}
       propertyPath: m_Value
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd820d7100e1784199379bd9727eb14, type: 3}
