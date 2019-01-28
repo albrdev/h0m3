@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         m_BSOD.Find("RestartButton").GetComponent<Button>().onClick.AddListener(SpawnPlayer);
+        m_BSOD.Find("ExitButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
     }
 
     private void Start()
